@@ -2,21 +2,15 @@
 
 [AWS Certified Security - Specialty](https://github.com/fujiokayu/learning-aws-css) の試験勉強用のリポジトリです。
 
-<!-- TOC -->
-
 - [learning-aws-css](#learning-aws-css)
-  - [[試験ガイド](https://d1.awsstatic.com/ja_JP/training-and-certification/docs-security-spec/AWS-Certified-Security-Specialty_Exam-Guide.pdf)](#試験ガイドhttpsd1awsstaticcomja_jptraining-and-certificationdocs-security-specaws-certified-security-specialty_exam-guidepdf)
+  - [試験ガイド](#試験ガイド)
   - [学習用コンテンツ](#学習用コンテンツ)
-    - [[サンプル問題](https://d1.awsstatic.com/ja_JP/training-and-certification/docs-security-spec/AWS-Certified-Security-Speciality_Sample-Questions.pdf)](#サンプル問題httpsd1awsstaticcomja_jptraining-and-certificationdocs-security-specaws-certified-security-speciality_sample-questionspdf)
-    - [[AWS Certified Security - Specialty 公式練習問題集(Official Practice Question Set)](https://explore.skillbuilder.aws/learn/course/external/view/elearning/12551/aws-certified-security-specialty-practice-question-set-scs-c01-japanese?ss=sec&sec=prep)](#aws-certified-security---specialty-公式練習問題集official-practice-question-sethttpsexploreskillbuilderawslearncourseexternalviewelearning12551aws-certified-security-specialty-practice-question-set-scs-c01-japanesesssecsecprep)
-    - [[公式トレーニング](https://explore.skillbuilder.aws/learn/course/762/exam-readiness-aws-certified-security-specialty-japanese)](#公式トレーニングhttpsexploreskillbuilderawslearncourse762exam-readiness-aws-certified-security-specialty-japanese)
-      - [インシデントへの対応](#インシデントへの対応)
+    - [公式トレーニング](#公式トレーニング)
+    - [インシデントへの対応](#インシデントへの対応)
       - [ログと監視](#ログと監視)
       - [インフラストラクチャのセキュリティ](#インフラストラクチャのセキュリティ)
       - [ID 及びアクセス管理](#id-及びアクセス管理)
       - [データ保護](#データ保護)
-
-<!-- /TOC -->
 
 ## [試験ガイド](https://d1.awsstatic.com/ja_JP/training-and-certification/docs-security-spec/AWS-Certified-Security-Specialty_Exam-Guide.pdf)
 
@@ -127,6 +121,65 @@
 
 #### インフラストラクチャのセキュリティ
 
+- 以下の方法を知っている必要がある
+  - AWS のエッジセキュリティの設計
+  - セキュアなネットワークインフラストラクチャの設計と実装
+  - セキュアなネットワークインフラストラクチャのトラブルシューティング
+  - ホストベースのセキュリティの設計と実装
+- エッジセキュリティ用の AWS ツール
+  - [Amazon Route 53](https://aws.amazon.com/jp/route53/)
+    - DNS サービス
+    - 他の AWS サービスと連携するように設計できる
+  - [AWS WAF](https://aws.amazon.com/jp/waf/)
+  - [Amazon CloudFront](https://aws.amazon.com/jp/cloudfront/)
+    - CDN
+  - [AWS Shield](https://aws.amazon.com/jp/shield/)
+    - ネットワークおよびトランスポートレイヤーを防御
+- AWS WAF の条件
+  - SQLi や XSS のような一般的な攻撃パターンをブロックするカスタムルールや、特定のアプリケーションのために設計されるルールを作成できる
+  - リクエストを許可またはブロックする基準
+    - クロスサイトスクリプティングの一致
+    - IP の一致
+    - 地理的な一致
+    - サイズの制約
+    - SQL インジェクションの一致
+    - 文字列の一致
+    - 正規表現の一致
+- DDoS 攻撃を軽減するための AWS ツール
+  - Amazon Route 53
+  - Amazon CloudWatch
+  - AWS WAF
+  - [Elastic Load Balancing](https://aws.amazon.com/jp/elasticloadbalancing/)
+  - Amazon CloudFront
+  - Amazon API Gateway
+  - [AWS Shield](https://aws.amazon.com/jp/shield/)
+  - [Amazon EC2 Auto Scaling](https://aws.amazon.com/jp/ec2/autoscaling/)
+- ネットワーク ACL
+  - サブネットレベルで作成、管理される
+  - ステートレスなトラフィックフィルター
+  - リストを拒否、または許可するためのルール
+- セキュリティグループ
+  - インスタンスの仮装 Fire Wall として機能
+  - ステートフルな防御
+  - Ingress ルールと egress ルールのみを許可する
+  - 通信を許可するには設定が必要
+- AMI のセキュリティに関する考慮事項
+  - 安全でないアプリケーションを無効化
+    - クリアテキストによる認証を使用したサービスとプロトコルを無効化
+  - 漏えいを最小化
+    - 必須でないネットワークサービスを起動時に無効化
+    - 必要がない場合は、ファイル共有、Print Spooler、RPC などのデフォルトのサービスを無効化
+  - AMI の作成時に認証情報を保護
+    - ディスクと設定ファイルから AWS とサードパーティのすべての認証情報を削除
+    - すべてのユーザー SSH パブリックキーペアとプライベートキーペアを削除
+    - すべてのユーザーアカウントのパスワードを削除および無効化
+
 #### ID 及びアクセス管理
+
+- 以下の方法を知っている必要がある
+  - AWS リソースにアクセスするためのスケーラブルな認証および認可システムの設計と実装
+  - AWS リソースにアクセスするための許可および認証システムのトラブルシューティング
+
+
 
 #### データ保護
