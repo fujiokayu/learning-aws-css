@@ -40,6 +40,12 @@
 
 ## 学習用コンテンツ
 
+### 書籍による学習
+
+[要点整理から攻略する『AWS認定 セキュリティ-専門知識』](https://www.amazon.co.jp/dp/B08DCLRHC7/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1)を購入。  
+ただし2020年の本なので、直近2年にリリースされたサービスや変更点はカバーされていない。  
+コントロールタワーなども対応していないので、新しいサービスは個別に公式ドキュメントを読み込む必要がある。
+
 ### [サンプル問題](https://d1.awsstatic.com/ja_JP/training-and-certification/docs-security-spec/AWS-Certified-Security-Speciality_Sample-Questions.pdf)
 
 - 腕試しには以下の Official Practice Question Set を使用した方が良い
@@ -305,3 +311,9 @@
   - アクセスの管理
   - 一元的なセキュリティと監査
   - 従量課金制
+
+## 模擬テストで補足する知見
+
+- [DDoS シミュレーションテストポリシー](https://aws.amazon.com/jp/security/ddos-simulation-testing/)
+- [Managing the AWS accounts in your organization](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
+  - SCP や OU
