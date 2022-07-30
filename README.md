@@ -312,8 +312,68 @@
   - 一元的なセキュリティと監査
   - 従量課金制
 
-## 模擬テストで補足する知見
+## 模擬テストや書籍で補足する知見
 
 - [DDoS シミュレーションテストポリシー](https://aws.amazon.com/jp/security/ddos-simulation-testing/)
 - [Managing the AWS accounts in your organization](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
-  - SCP や OU
+  - SCP や OU について以下で補足する
+- AWS Orgnizations
+  - ルートと呼ばれるマスターアカウントとそれに紐づくメンバーアカウントの２種類のアカウントがある
+  - OU という組織単位で管理し、上位階層の OU の設定は下位の OU に引き継がれる
+  - サービスコントロールポリシー（SCP）
+    - AWS サービスの利用可否を設定し、OU 単位で適用する
+    - ルートにも適用できるが、将来的に弊害となる恐れがあるのでルートより下で設定するのが良さそう
+    - 別途 IAM ポリシーを設定されている場合、IAM と SCP の両方で許可されているものだけが利用可能となる
+- AWS WAF
+  - v1 では10ルールまでだったが、2019/11以降はWAF Capacity Unit という単位に変更され、より複雑な設定が可能になった
+- AWS  Shield
+  - Standard ではネットワーク層およびトランスポート層の一般的な DDoS 攻撃に対処
+  - Advance ではさらに高度な攻撃や DDoS によるコスト増に対処し、かつ、専門チームのサポートが受けられる
+    - アノマリー検知ができる
+- AWS Firewall Manager
+  - AWS WAF、AWS Shield Advanced、Amazon VPC Security Group を一元管理するためのサービス
+  - あらかじめルールを作っておくことによって新たなアプリやリソースに適用できる
+  - AWS Organization と統合されているので、複数のアカウントに跨って操作できる
+- Amazon Route 53
+  - DNS サービスだが、単純な名前解決だけではなく
+  - ヘルスチェックを設定しておくことで、フェイルオーバールーティングを使って異常時に Sorry ページへルーティングすることもできる
+  - 位置情報ルーティングを使って大陸別、国別のルーティングを行うことができる
+    - セキュリティを目的にサービスを展開していない国からのアクセスを弾いたりもできるのか
+  - レイテンシーが最小になるようにルーティングすることができる
+  - 加重ルーティングによってリクエスト全体の中から一定の割合のみ別の向き先へルーティングする、といったこともできる
+- Amazon CloudFront
+  - 静的データ、動的データを高速に配信するための CDN サービス
+  - AWS 内の origin とエッジ間でのデータ転送は無料
+  - origin が S3 の場合、CloudFront に Origin Access Identity という特別なユーザー設定をすることで、S3 はそこからの読み取りだけを許容するように設定できる
+    - 最近だと Managed Prefix を使うはず
+- Elastic LoadBalancing
+  - Application LoadBalancer
+    - レイヤー7で動作
+    - VPC に属する EC2、コンテナ、IP アドレス、Lambda を指定できる
+    - 急激なトラフィック増加に対してスケールが間に合わない時がある
+  - Network LoadBalancer
+    - レイヤー4で動作
+    - VPC に属する EC2、コンテナを指定できる
+    - 急激なトラフィック増加にも対応
+  - Classic LoadBalancer
+    - レイヤー4と7の両方で動作
+    - EC2-Classic と VPC の両環境で動作する
+      - 基本的に EC2-Classic で使われることを想定しており、VPC 環境では ALB か ELB が推奨されている
+  - ALB と CLB は動的に IP が割り当てられるので、DNS 名が必要になる
+  - ALB と CLB はセキュリティ・グループが使用可能
+- [AWS AutoScaling](https://aws.amazon.com/jp/autoscaling/)
+  - EC2、Spot Fleet、ECS タスク、DynamoDB のテーブルとインデックス、Aurora のレプリカが対象
+  - CloudWatch メトリクスの増減のほか、スケジュールされたスケールや学習によって予測したスケーリング機能がある
+  - 総数を維持する設定では、障害によって動作しないインスタンスが発生したら追加することが可能
+- Security Group
+  - インスタンスに対するトラフィックへのアクセス制御を行う
+  - 一つのインスタンスには複数の Security Group を割り当てられる
+  - Network ACL は VPC サブネット間の通信を制御する機能であり、サブネット間通信の場合は SG と NACL の両方で許可されている必要がある
+    - Network ACL はステートレスであるため、往路と復路両方の通信をそれぞれのサブネットで許可しておく必要がある
+- [AWS Artifact](https://aws.amazon.com/jp/artifact/)
+  - AWS のセキュリティおよびコンプライアンスレポート(AWS Artifact Report)と特定のオンライン契約にオンデマンドでアクセスできる
+  - AWS Artifact Report
+    - サードパーティーの監査人による AWS の監査レポートのダウンロードサービス
+    - このレポートを利用するには AWS との事業提携契約、秘密保持契約を受諾する必要がある
+  - AWS Artifact Agreement
+    - AWS と BAA などの契約を締結するためのサービス
