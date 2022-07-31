@@ -415,3 +415,42 @@
   - KMS よりも高くてセキュアな高級鍵管理サービス。より厳格なコンプライアンスが求められるユーザー向け
   - 暗号化キーの保存に専用のハードウェアが使用されるため、鍵の内容は AWS も参照することはできない
   - VPC 内に配置する
+
+### ログと監視
+
+- Amazon CloudWatch
+  - 最大15ヶ月保持
+  - CloudWatch エージェントをインストールさえすればオンプレミスのサーバーでも使える
+- AWS Config
+  - こちらもオンプレミスでも使える。収集する対象のリソースは利用者が設定する
+- AWS CloudTrail
+  - AWS 操作が自動的に記録される
+  - 管理イベント、データイベント、インサイトイベント（検知された異常なアクティビティ）があり、デフォルトで有効なのは管理イベント
+  - ダイジェストを使った整合性検証ができる
+- [AWS X-Ray](https://aws.amazon.com/jp/xray/)
+  - アプリのサービス間リクエストを収集し、分析するためのサービス
+  - 対象のアプリが X-Ray SDK を統合し、エージェントをインストールすることでキャプチャが可能になる
+- [Amazon Inspector](https://aws.amazon.com/jp/inspector/)
+  - Amazon EC2 と ECR のセキュリティ評価を行う
+  - チェックルールはマネージドなものしか使用できない
+- VPC Flow Logs
+  - 送信元/先の IP、通信許可、遮断などのネットワークの基本情報が確認できる
+  - CloudWatch と連携させてセキュリティ・アラートを実装するなど
+- [Amazon QuickSight](https://aws.amazon.com/jp/quicksight/)
+  - DB や S3/Athena のデータをダッシュボードビューで可視化できる
+  - Salesforce などの SaaS にも接続が可能
+- Amazon Kinesis
+  - Kinesis Data Streams
+    - 大量のストリームデータをリアルタイム処理するためのサービス
+  - Kinesis Data Firehose
+    - ストリームデータを AWS データストア(S3, RedShift, Elastic)にロードするためのサービス
+  - Kinesis Data Analytics
+    - ストリームデータをリアルタイムで SQL 処理するためのサービス
+  - Kinesis Video Streams
+    - 動画データを AWS へストリーミングするためのサービス
+
+## [AWS Black Belt Online Seminar](https://aws.amazon.com/jp/aws-jp-introduction/aws-jp-webinar-service-cut/#management-admin)
+
+### [AWS Identity and Access Management (AWS IAM) Part1](https://www.youtube.com/watch?v=K7F5yTThynw)
+
+### [AWS Identity and Access Management (AWS IAM) Part2](https://www.youtube.com/watch?v=qrZKKF6V6Dc)
