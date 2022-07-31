@@ -315,6 +315,9 @@
 ## 模擬テストや書籍で補足する知見
 
 - [DDoS シミュレーションテストポリシー](https://aws.amazon.com/jp/security/ddos-simulation-testing/)
+
+### インフラストラクチャのセキュリティ
+
 - [Managing the AWS accounts in your organization](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
   - SCP や OU について以下で補足する
 - AWS Orgnizations
@@ -377,3 +380,38 @@
     - このレポートを利用するには AWS との事業提携契約、秘密保持契約を受諾する必要がある
   - AWS Artifact Agreement
     - AWS と BAA などの契約を締結するためのサービス
+- [AWS Control Tower](https://aws.amazon.com/jp/controltower)
+  - ブループリントベースでマルチアカウントの AWS 環境のセットアップを自動化
+  - ガードレールと呼ばれる必須の、強く推奨されている高レベルルールを提供し、これがサービスコントロールポリシー (SCP) を使用
+  - AWS Config とも連携
+
+### データ保護
+
+- AWS Key Management Service
+  - 鍵の使用履歴は全て CloudTrail に保存される
+  - エンベロープ暗号化という仕組みで暗号化を行っており、データを暗号化するための Customer Data Key(CDK) とデータキーを暗号化するための Customer Master Key(CMK)を使うことになる
+    - CMK で暗号化できるのは 4KB まで
+    - リージョン間で CMK の共有はできない
+  - カスタマー管理、AWS 管理、AWS 所有の３種類の CMK がある
+    - カスタマー管理 CMK
+      - AWS 利用者が作成、所有、管理する。1年ごとの自動ローテーションを有効、無効を設定可能
+    - AWS 管理 CMK
+      - 3年ごとに AWS 側で自動ローテーションされる
+    - AWS 所有 CMK
+      - AWS サービスが裏側で使っているもので、利用者が意識することはない
+  - CMK は有効化、無効化、再有効化ができる
+  - CMK の削除には7〜30日間の待機期間が設けられている
+    - この間に使用されたかどうかは CloudWatchh や CloudTrail で確認できる
+  - CMK をローテーションした後も、CMK はローテーション前のキー情報（バッキングキー）も保持しているため、古いデータも復号できる
+  - 1年よりも短いサイクルでキーローテーションをしたい場合、手動ローテーションができる
+  - Bring Your Own Key の機能で、ユーザーが作成したキーをインポートすることもできる
+    - インポートできるのは 256bit 対象キー
+    - 自動ローテートはできない
+  - キーポリシーや IAM ポリシーを使ってアクセス制御が可能
+  - キーポリシーを使用して、MFA を矯正することが可能
+  - KMS の API リクエストにはレート制限があるため、1秒に1万回以上呼び出すとエラーになる
+  - 2019/11 から非対称暗号もサポート
+- [AWS CloudHSM](https://aws.amazon.com/jp/cloudhsm/)
+  - KMS よりも高くてセキュアな高級鍵管理サービス。より厳格なコンプライアンスが求められるユーザー向け
+  - 暗号化キーの保存に専用のハードウェアが使用されるため、鍵の内容は AWS も参照することはできない
+  - VPC 内に配置する
