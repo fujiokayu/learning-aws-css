@@ -449,6 +449,36 @@
   - Kinesis Video Streams
     - 動画データを AWS へストリーミングするためのサービス
 
+### インシデント対応
+
+- AWS Config
+  - Config ルールという機能で各設定がルールに準拠しているかチェックできる
+    - EBS が暗号化されているか、S3 がパブリックになっていないか、SSH がパブリックに開いてないか、など
+    - マネージドルールとカスタムルールがある
+  - Config ルールで非準拠となったリソースに対して、検知したタイミングで自動修復を行うことができる
+    - この機能が出るまでは、CloudEvents で Lambda を呼び出して修正する、というパターンが使われていた
+- AWS Systems Manager
+  - EC2 やオンプレミスのサーバーを制御、管理するためのサービス
+  - Run Command や Session Manager、Parameter Store などの複数の機能から構成されている
+  - リソースを更新、管理、設定する場合は SSM Agent のインストールが必要
+  - Inventory では SSM Agent がインストールされたサーバーにインストールされているソフトウェアを一覧表示できる
+- AWS Trusted Advisor
+  - コスト、パフォーマンス、セキュリティ、フォールトトレランス、サービス制限の5つの観点からチェックを行なってくれる
+  - リアルタイム検知を行いたい場合は CloudWatch と組み合わせる
+- AWS CloudFormation
+  - CloudFormation テンプレートを使った環境である場合、すぐにその環境のコピーが作れるのでインシデント対応時に再現環境がすぐに作れる
+  - ドリフト検出機能で稼働中の環境とテンプレートの差分を検出できる
+- Amazon Macie
+  - S3 上の個人情報などの機密データを自動的に発見、通知、保護処理を行える
+- Amazon GuardDuty
+  - VPC Flow Logs、CloudTrail、DNS Logs をインプットにしている
+- AWS Security Hub
+  - セキュリティ状況やコンプライアンスの準拠情報を確認できる
+- Amazon Detective
+  - VPC Flow Logs、CloudTrail、GuardDuty などをインプットに、潜在的なセキュリティの問題や不審なアクティビティを分析、調査できるサービス
+  - 過去のログやイベント情報といった時系列の観点を含み、グラフ化、可視化するという点で GuardDuty とは目的が異なる
+
+
 ## [AWS Black Belt Online Seminar](https://aws.amazon.com/jp/aws-jp-introduction/aws-jp-webinar-service-cut/#management-admin)
 
 ### [AWS Identity and Access Management (AWS IAM) Part1](https://www.youtube.com/watch?v=K7F5yTThynw)
