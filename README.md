@@ -312,9 +312,7 @@
   - 一元的なセキュリティと監査
   - 従量課金制
 
-## 模擬テストや書籍で補足する知見
-
-- [DDoS シミュレーションテストポリシー](https://aws.amazon.com/jp/security/ddos-simulation-testing/)
+## 書籍で補足する知見
 
 ### インフラストラクチャのセキュリティ
 
@@ -436,6 +434,7 @@
 - VPC Flow Logs
   - 送信元/先の IP、通信許可、遮断などのネットワークの基本情報が確認できる
   - CloudWatch と連携させてセキュリティ・アラートを実装するなど
+  - パケット情報までは確認できないため、必要に応じてパケットキャプチャツールが必要
 - [Amazon QuickSight](https://aws.amazon.com/jp/quicksight/)
   - DB や S3/Athena のデータをダッシュボードビューで可視化できる
   - Salesforce などの SaaS にも接続が可能
@@ -478,6 +477,20 @@
   - VPC Flow Logs、CloudTrail、GuardDuty などをインプットに、潜在的なセキュリティの問題や不審なアクティビティを分析、調査できるサービス
   - 過去のログやイベント情報といった時系列の観点を含み、グラフ化、可視化するという点で GuardDuty とは目的が異なる
 
+## 模擬テストで補足する知見
+
+- [DDoS シミュレーションテストポリシー](https://aws.amazon.com/jp/security/ddos-simulation-testing/)
+  - DDoS シミュレーションには AWS Partner Network の協力が必要
+- AWS CLI またはコンソールだけを使用して CMK をローテーションすることはできない
+- Lambda 関数と EventBridge (CloudWatch Events) は、キーマテリアルをローテーションできない
+- Organizations 内で組織証跡を設定すると、ログファイルの整合性検証を有効にできる
+- Amazon Inspector は EC2 インスタンスのネットワークアクセシビリティと、インスタンスで実行されるアプリケーションのセキュリティ状態をテストする
+  - Amazon Inspector はアプリケーションの露出、脆弱性、ベストプラクティスからの逸脱を評価する
+  - ネットワーク到達可能性パッケージルールは、ネットワーク設定を分析して EC2 インスタンスのセキュリティ上の脆弱性を見つけます。
+- S3 バケットは IAM ロールを継承できない
+- S3 オブジェクト所有権は、バケット所有者が他の AWS アカウントによってバケットにアップロードされたオブジェクトの所有権を自動的に継承できる S3 の機能
+- [AssumeRoleWithSAML](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithSAML.html)
+  - IAM ポリシーは、SAML アサーションによって認証される IAM ロールに割り当てられる
 
 ## [AWS Black Belt Online Seminar](https://aws.amazon.com/jp/aws-jp-introduction/aws-jp-webinar-service-cut/#management-admin)
 
