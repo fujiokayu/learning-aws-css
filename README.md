@@ -497,3 +497,22 @@
 ### [AWS Identity and Access Management (AWS IAM) Part1](https://www.youtube.com/watch?v=K7F5yTThynw)
 
 ### [AWS Identity and Access Management (AWS IAM) Part2](https://www.youtube.com/watch?v=qrZKKF6V6Dc)
+
+## 追加の問題集
+
+[1週間で攻略！AWS認定セキュリティ – 専門知識 本番用問題集 140問（65問 × 2セット + 10問） 詳解付き AWS認定本番用問題集シリーズ](https://amazon.co.jp/dp/B09RH137K4)
+
+不正解である回答について何も言及がないのがやや不便
+
+- ACM証明書をAmazonCloudFrontで使用するには、USEast（N.Virginia）リージョンで証明書をリクエストまたはインポートする必要があります。
+- ActiveDirectoryでは、信頼関係によって様々なリソースへのアクセスが可能になりますが、この信頼関係には一方通行のものと双方向のものがあります。一方向の信頼とは、2つのドメイン間に作成される一方向の認証パスのことです。ドメインAとドメインBの間の一方通行の信頼関係では、ドメインAのユーザーはドメインBのリソースにアクセスできますが、ドメインBのユーザーはドメインAのリソースにはアクセスできません。一方通行の信頼関係には、作成される信頼関係の種類に応じて、非遷移的または遷移的なものがあります。
+- すでにADインフラストラクチャを持っていて、AD対応のワークロードをAWSクラウドに移行する際にそれを使用したい場合、AWSManagedMicrosoftADが役立ちます。ADトラストを使用して、AWSManagedMicrosoftADを既存のADに接続することができます。これにより、ユーザーはオンプレミスのAD認証情報を使って、ユーザー、グループ、パスワードを同期することなく、AD対応のアプリケーションやAWSアプリケーションにアクセスすることができます。
+- EC2 の EBS ボリュームが KMS で暗号化されている時に追加で必要になるパーミッション
+  - "Condition":{"Bool":{"kms:GrantIsForAWSResource":true
+  - 「Action」要素にkms:CreateGrant
+- デフォルトでは、CloudTrailがユーザーのバケットに配信するログファイルは、AmazonS3が管理する暗号化キー（SSES3）を用いたAmazonサーバーサイド暗号化によって暗号化されます。
+  - 直接管理可能なセキュリティレイヤーを提供するために、代わりにCloudTrailのログファイルにAWSKMS管理下の鍵によるサーバーサイド暗号化（SSEKMS）を使用することができます。
+- AWSSecurityHub の CISAWSFoundationsBenchmarkは、AWSのセキュリティ構成のベストプラクティスをまとめたものです。業界で認められているこれらのベストプラクティスは、すでに提供されているハイレベルなセキュリティガイダンスを超えて、AWSユーザーに明確なステップバイステップの実装と評価の手順を提供します。
+- (API で利用する際に)アカウントに割り当てられているAWS管理のCMKではなく、顧客管理のCMKを使用するには、keyidパラメータを使用してキーを指定する必要があります。
+- AmazonCognitoのIdentityPoolは、ゲスト（未認証）のユーザーや、認証されてトークンを受け取ったユーザーに一時的なAWSクレデンシャルを提供します。
+- AWSCloudHSMは、ユーザー自身のAmazonVirtualPrivateCloud（VPC）内で動作するため、AmazonEC2インスタンス上で動作するアプリケーションでHSMを容易に使用することができます。
