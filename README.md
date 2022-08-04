@@ -307,6 +307,7 @@
     - ロック後はポリシーの変更不可
     - Write Once Read Many のサポート
 - AWS Secrets Manager
+  - ライフサイクルを通じてデータベース認証情報、API キー、その他のシークレットを簡単にローテーション、管理、取得する
   - シークレットの安全なローテート
   - アクセスの管理
   - 一元的なセキュリティと監査
@@ -516,3 +517,18 @@
 - (API で利用する際に)アカウントに割り当てられているAWS管理のCMKではなく、顧客管理のCMKを使用するには、keyidパラメータを使用してキーを指定する必要があります。
 - AmazonCognitoのIdentityPoolは、ゲスト（未認証）のユーザーや、認証されてトークンを受け取ったユーザーに一時的なAWSクレデンシャルを提供します。
 - AWSCloudHSMは、ユーザー自身のAmazonVirtualPrivateCloud（VPC）内で動作するため、AmazonEC2インスタンス上で動作するアプリケーションでHSMを容易に使用することができます。
+
+## Web 学習
+
+[AWS WEB問題集で学習しよう](https://aws.koiwaclub.com/paid-membership-registration/)
+追加の問題集が Kindle で見るとレイアウトが大変微妙で手間がかかるので、これも試してみる。
+
+Certified Security Specialty を受ける場合はプロフェッショナルプランで ¥5480(税抜)。
+せっかくならついでに SAP も取りたくなるな・・・
+
+- [AWS KMS のキーポリシー](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
+- アクセスキーの漏洩は Trusted Advisor で。
+- AWS Direct Connect
+  - AWS への専用ネットワーク接続を作成する
+- CloudTrail は DynamoDB と統合されており、IP アドレス情報をもとに API 呼び出しを追跡できる
+  - 一方で、CloudWatch は DevOps や SRE、マネージャー層のためのモニタリングを提供する
