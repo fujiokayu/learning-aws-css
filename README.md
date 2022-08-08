@@ -466,6 +466,7 @@
 - AWS Trusted Advisor
   - コスト、パフォーマンス、セキュリティ、フォールトトレランス、サービス制限の5つの観点からチェックを行なってくれる
   - リアルタイム検知を行いたい場合は CloudWatch と組み合わせる
+  - Trusted Advisor のチェックに基づいて CloudWatch Events を設定することはできません。
 - AWS CloudFormation
   - CloudFormation テンプレートを使った環境である場合、すぐにその環境のコピーが作れるのでインシデント対応時に再現環境がすぐに作れる
   - ドリフト検出機能で稼働中の環境とテンプレートの差分を検出できる
@@ -489,6 +490,7 @@
 - Amazon Inspector は EC2 インスタンスのネットワークアクセシビリティと、インスタンスで実行されるアプリケーションのセキュリティ状態をテストする
   - Amazon Inspector はアプリケーションの露出、脆弱性、ベストプラクティスからの逸脱を評価する
   - ネットワーク到達可能性パッケージルールは、ネットワーク設定を分析して EC2 インスタンスのセキュリティ上の脆弱性を見つけます。
+  - Amazon Inspector は EC2 インスタンスの脆弱性をチェックできますが、セキュリティグループへのアクセスは確認できません
 - S3 バケットは IAM ロールを継承できない
 - S3 オブジェクト所有権は、バケット所有者が他の AWS アカウントによってバケットにアップロードされたオブジェクトの所有権を自動的に継承できる S3 の機能
 - [AssumeRoleWithSAML](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithSAML.html)
